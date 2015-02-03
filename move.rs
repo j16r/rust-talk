@@ -1,4 +1,4 @@
-fn draw_shape<T>(points: Vec<T>) {
+fn draw_shape<T : Copy>(points: Vec<T : Copy>) {
     for point in points.iter() {
         // ...
     }
