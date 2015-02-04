@@ -110,7 +110,7 @@ fn main() {
         </h3>
         <pre><code class="rust">
 fn main() {
-    if 10 * 7 > 60 {
+    if 10 * 7 &gt; 60 {
         println!("Math appears to work!");
     } else {
         println!("What is going on");
@@ -125,13 +125,13 @@ fn main() {
         </h3>
         <pre><code class="rust">
 fn main() {
-    let result = if 10 * 7 > 60 {
+    let result = if 10 * 7 &gt; 60 {
         true
     } else {
         false
     };
     println!("Result is {}", result);
-    // => Result is true
+    // =&gt; Result is true
 }
         </code></pre>
       </article>
@@ -184,7 +184,7 @@ fn main() {
   let player1 = Spaceship { x: 0, y : 0, health : 100 };
   let Spaceship{x, ..} = player1;
   println!("Player is at {}x", x);
-  // => Player is at 0x
+  // =&gt; Player is at 0x
 }
         </code></pre>
       </article>
@@ -196,7 +196,7 @@ fn main() {
         <pre><code class="rust">
 enum Permission {
   Allow,
-  Deny(&'static str) //'
+  Deny(&amp;'static str)
 }
 
 fn main() {
@@ -216,14 +216,14 @@ fn main() {
         <pre><code class="rust">
 enum Result {
   Allow,
-  Deny(&'static str) //'
+  Deny(&amp;'static str)
 }
 
 fn main() {
     let access = Permission::Deny("Red keypass required");
     match access {
-        Permission::Deny(ref reason) => println!("Attempt to open door: {}", reason),
-        Permission::Allow => println!("Door opened!")
+        Permission::Deny(ref reason) =&gt; println!("Attempt to open door: {}", reason),
+        Permission::Allow =&gt; println!("Door opened!")
     }
     // Attempt to open door: Red keypass required
 }
@@ -235,13 +235,13 @@ fn main() {
           Functions
         </h3>
         <pre><code class="rust">
-fn plusone(value : i32) -> i32 {
+fn plusone(value : i32) -&gt; i32 {
     value + 1
 }
 
 fn main() {
     println!("Let {} begin!", plusone(32));
-    // => Let 33 begin!
+    // =&gt; Let 33 begin!
 }
         </code></pre>
       </article>
@@ -260,7 +260,7 @@ enum List&lt;T&gt; {
 fn main() {
     let list = List::Item(10, Box::new(List::Nil));
     println!("List {:?}", list);
-    // => List Item(10, Nil)
+    // =&gt; List Item(10, Nil)
 }
         </code></pre>
       </article>
@@ -269,6 +269,21 @@ fn main() {
         <h2>
           Resources
         </h2>
+      </article>
+      
+      <article>
+        <h3>
+          Memory
+        </h3>
+        <pre><code class="C++">
+{
+  char * str = malloc(strlen(input_str) + 1);
+  char * token = strtok(str);
+  free(str);
+
+  return token;
+}
+        </code></pre>
       </article>
 
       <article>
@@ -295,16 +310,16 @@ fn main() {
           Borrowing
         </h3>
         <pre><code class="rust">
-fn increment(value: &mut i32)  {
+fn increment(value: &amp;mut i32)  {
     *value += 1;
 }
 
 fn main() {
     let mut value = 10;
-    increment(&mut value);
+    increment(&amp;mut value);
     println!("Value after increment: {}", value);
     // Value after increment: 11
-    increment(&mut value);
+    increment(&amp;mut value);
     println!("Value after increment: {}", value);
     // Value after increment: 12
 }
@@ -340,14 +355,14 @@ fn main() {
         <pre><code class="rust">
 #[derive(Show)]
 enum List {
-  Item(i32, Box<List>),
+  Item(i32, Box&lt;List&lt;),
   Nil
 }
 
 fn main() {
     let list = List::Item(10, Box::new(List::Item(5, Box::new(List::Item(1, Box::new(List::Nil))))));
     println!("List {:?}", list);
-    // => List Item(10, Item(5, Item(1, Nil)))
+    // =&gt; List Item(10, Item(5, Item(1, Nil)))
 }
         </code></pre>
       </article>
@@ -364,11 +379,11 @@ struct Shape {
 }
 
 trait Drawable {
-    fn draw(&self);
+    fn draw(&amp;self);
 }
 
 impl Drawable for Shape {
-    fn draw(&self) {
+    fn draw(&amp;self) {
         for point in self.points.iter() {
             // ...
         }
@@ -417,7 +432,7 @@ use std::thread::Thread;
 use std::sync::mpsc;
 
 fn fib(n: u64) -&gt; u64 {
-    if n < 2 {
+    if n &lt; 2 {
         return n;
     }
     return fib(n - 1) + fib(n - 2);
